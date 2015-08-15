@@ -50,7 +50,7 @@ class UnorderedLinkedList(object):
 
             if i is 0:
 
-                self.head.next = node
+                self.head = node
 
             else:
 
@@ -62,14 +62,18 @@ class UnorderedLinkedList(object):
 
     def traverse(self):
 
-        select_node = self.head.next
+        select_node = self.head
 
+        data_list = []
 
-        data_list = ["head"]
+##        i = 0
 
         while(select_node):
+##            print "round %d - %s" %(i, select_node.data)
+##            i = i + 1
+            print select_node.data
 
-            data_list.append(select_node.data)
+            data_list.append(str(select_node.data))
 
             select_node = select_node.next
 
@@ -99,7 +103,36 @@ class UnorderedLinkedList(object):
 
         return
 
+    def reverseByLoop(self, head = None):
+        """ Reverse the linked list
+            Non-recursive method
+            - Move the following nodes to the head
+        """
+        if not head:
+            head = self.head
+
+        if not head.next:
+
+            return head
+
+        p = head
+
+        q = head.next
+
+        head.next = None   ## very important
+
+        while(q):
+            r = q.next
+            q.next = p
+            p = q
+            q = r
+
+        head = p
+
+        return head
+
 if __name__ == '__main__':
+
     ll = UnorderedLinkedList()
 
     ll.initialize()
@@ -107,5 +140,9 @@ if __name__ == '__main__':
     ll.traverse()
 
     ll.insert(6, "new")
+
+    ll.traverse()
+
+    ll.reverseByLoop()
 
     ll.traverse()

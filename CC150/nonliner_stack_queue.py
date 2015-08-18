@@ -36,8 +36,8 @@ class SinglyLinkedListNode(object):
 
 class UnorderedLinkedList(object):
     def __init__(self):
-        self.head = SinglyLinkedListNode()
-        self.tail = SinglyLinkedListNode()
+        self.head = None
+        self.tail = None
 
     def initialize(self):
         last_node = None
@@ -64,7 +64,7 @@ class UnorderedLinkedList(object):
 
         select_node = self.head
 
-        data_list = []
+        data_list = ['head']
 
 ##        i = 0
 
@@ -103,12 +103,39 @@ class UnorderedLinkedList(object):
 
         return
 
+    def reverseByRecursive(self, head = None):
+
+        if not head:
+
+            head = self.head
+
+        if not head.next:
+
+            return head
+
+        self.head = self.doReverse(head, None)
+
+        return self.head
+
+    def doReverse(self, head, new_head):
+
+        if head is None:
+
+            return new_head
+
+        next_node = head.next
+
+        head.next = new_head
+
+        return self.doReverse(next_node, head)
+
     def reverseByLoop(self, head = None):
         """ Reverse the linked list
             Non-recursive method
             - Move the following nodes to the head
         """
         if not head:
+
             head = self.head
 
         if not head.next:
@@ -127,9 +154,9 @@ class UnorderedLinkedList(object):
             p = q
             q = r
 
-        head = p
+        self.head = p
 
-        return head
+        return self.head
 
 if __name__ == '__main__':
 
@@ -143,6 +170,7 @@ if __name__ == '__main__':
 
     ll.traverse()
 
-    ll.reverseByLoop()
+##    ll.reverseByLoop()
+    ll.reverseByRecursive()
 
     ll.traverse()

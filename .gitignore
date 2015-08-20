@@ -56,3 +56,4 @@ docs/_build/
 # PyBuilder
 target/
 CC150/module1.py
+.idea/

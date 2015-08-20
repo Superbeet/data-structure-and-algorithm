@@ -103,8 +103,10 @@ class UnorderedLinkedList(object):
 
         return
 
-    def reverseByRecursive(self, head = None):
 
+    def reverseByRecursive(self, head = None):
+        """ Tail Recursive
+        """
         if not head:
 
             head = self.head
@@ -118,16 +120,49 @@ class UnorderedLinkedList(object):
         return self.head
 
     def doReverse(self, head, new_head):
-
         if head is None:
-
             return new_head
 
         next_node = head.next
-
         head.next = new_head
 
-        return self.doReverse(next_node, head)
+        self.doReverse(next_node, head)
+
+    def reverseByRecursive2(self, head = None, new_head = None):
+        """ Not tail recursive
+        """
+        if not head:
+
+            head = self.head
+
+        if not head.next:
+
+            new_head = head
+
+            return head
+
+        new_tail = self.reverseByRecursive2(head.next, new_head)
+
+        new_tail.next = head
+
+        head.next = None
+
+        print "head.data->", head.data
+
+        return head
+
+
+##    def doReverse(self, head, new_head):
+##
+##        if head is None:
+##
+##            return new_head
+##
+##        next_node = head.next
+##
+##        head.next = new_head
+##
+##        return self.doReverse(next_node, head)
 
     def reverseByLoop(self, head = None):
         """ Reverse the linked list
@@ -171,6 +206,7 @@ if __name__ == '__main__':
     ll.traverse()
 
 ##    ll.reverseByLoop()
-    ll.reverseByRecursive()
+##    ll.reverseByRecursive()
+    ll.reverseByRecursive2()
 
     ll.traverse()

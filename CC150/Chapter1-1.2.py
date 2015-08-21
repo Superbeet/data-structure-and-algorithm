@@ -1,30 +1,18 @@
-#-------------------------------------------------------------------------------
-# Name:        module1
-# Purpose:
-#
-# Author:      507061
-#
-# Created:     19/08/2015
-# Copyright:   (c) 507061 2015
-# Licence:     <your licence>
-#-------------------------------------------------------------------------------
+def reverse_string(res_str):
+	if not res_str:
+		return False
 
-def reverseStr(res_str):
-    if not res_str:
-        print "null string"
-        return False
+	str_list = list(res_str)
 
-    char_list = list(res_str)
+	for pos in range(0, len(str_list)/2):
+		temp = str_list[pos]
+		str_list[pos] = str_list[len(str_list)-1-pos]
+		str_list[len(str_list)-1-pos] = temp
 
-    for pos in range(0, len(char_list)/2):
-        temp = char_list[pos]
-        char_list[pos] = char_list[len(res_str)-pos-1]
-        char_list[len(res_str)-pos-1] = temp
+	new_str = "".join(str_list)
 
-    new_str = "".join(char_list)
-
-    return new_str
+	return new_str
 
 if __name__ == '__main__':
-    res_str = "hello world"
-    print reverse(res_str)
+	my_str = "abcdefgh hello world"
+	print reverse_string(my_str)

@@ -1,33 +1,30 @@
-#-------------------------------------------------------------------------------
-# Name:        module1
-# Purpose:
-#
-# Author:      507061
-#
-# Created:     20/08/2015
-# Copyright:   (c) 507061 2015
-# Licence:     <your licence>
-#-------------------------------------------------------------------------------
+def char_dict(target_str):
+	if not target_str:
+		print "null string"
+		return False
 
-def replace_space(target_str):
-    if not target_str:
-        print "target string is NULL"
-        return False
+	hash_table = {}
 
-    str_list = list(target_str)
+	for char in target_str:
+		if char not in hash_table.keys():
+			hash_table[char] = 0
+		else:
+			hash_table[char] += 1
 
-##    for char in str_list:
-##        if char == " ":
-##            char = "%20"
+	return hash_table 
 
-    for pos in range(0, len(str_list)):
-        if str_list[pos] == ' ':
-            str_list[pos] = "%20"
+def check_permutation(str_1, str_2):
+	if not str_1 or not str_2:
+		print "null string"
+		return False
 
-    new_str = "".join(str_list)
-
-    return new_str
+	if char_dict(str_1) == char_dict(str_2):
+		return True
+	else:
+		return False
 
 if __name__ == '__main__':
-    my_str = "hello world"
-    print replace_space(my_str)
+	my_str_1 = "hello world!"
+	my_str_2 = "world hello"
+
+	print check_permutation(my_str_1, my_str_2)

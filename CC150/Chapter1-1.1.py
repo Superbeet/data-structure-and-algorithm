@@ -1,30 +1,19 @@
-#-------------------------------------------------------------------------------
-# Name:        module1
-# Purpose:
-#
-# Author:      507061
-#
-# Created:     19/08/2015
-# Copyright:   (c) 507061 2015
-# Licence:     <your licence>
-#-------------------------------------------------------------------------------
+def check_duplicate_char(res_str):
+	if not res_str:
+		print "null string"
+		return False
 
-def checkDuplicateChar(res_str):
-    pos = 0
-    hash_table = {}
+	hash_table = {}
 
-    for char in res_str:
-        # create a key-value pair if not existing
-        if char not in hash_table.keys():
-            hash_table.update({char:1})
+	for char in res_str:
+		if char not in hash_table.keys():
+			hash_table.update({char:1})
+		else:
+			hash_table[char] += 1
+			print "duplicate char -> %s"%char
 
-        # inform if duplicate char is found
-        if hash_table[char] > 0:
-            hash_table[char] += 1
-
-            print "Find duplicate char: %s"%(char)
+	return hash_table
 
 if __name__ == '__main__':
-    my_str = "abcddddefgggghiiii"
-    checkDuplicateChar(my_str)
-
+	my_str = "abccccdefghijjjjjkkkkk"
+	check_duplicate_char(my_str)

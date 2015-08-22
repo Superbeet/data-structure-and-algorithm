@@ -1,56 +1,59 @@
 
 """
-0 1 2 3 4 5 6
+# 0 1 2 3 4 5
+0 a b c d e f
 1 a b c d e f
 2 a b c d e f
 3 a b c d e f
 4 a b c d e f
 5 a b c d e f
-6 a b c d e f
 """
-import copy
+from copy import deepcopy
 
 def print_matrix(target_matrix):
-	x_axis = [ str(i) for i in range(0, len(target_matrix)+1) ]
-	print ' '.join(x_axis)
+    x_axis = [ str(i) for i in range(0, len(target_matrix)) ]
+    x_axis.insert(0, "x")
+    row_items = ' '.join(x_axis)
+    print row_items
 
-	row_num = 0
-	for row in target_matrix:
-		row_num += 1
-		row_items = ' '.join(row)
-		print "%d %s" %(row_num, row_items)
+    row_num = 0
+    for row in target_matrix:
+        row_items = ' '.join(row)
+        print "%d %s" %(row_num, row_items)
+        row_num += 1
 
 def rotate_image(target_matrix):
 
+    size = len(target_matrix)
+
     start_level = 0
 
-    end_level = len(target_matrix)/2
+    end_level = size/2
 
     start_index = 0
-##    end_index = end_level - start_index
+    
+    # print 'level->', range(start_level , end_level)
 
-    for level in range(start_level , end_level-start_level):
+    for level in range(start_level , end_level):
 
         start_index = level
 
-        end_index = len(target_matrix) - start_index - 1
+        end_index = size - level - 1
 
-        print "[start_level, end_level, level][start_index, end_index] -> %s%s"\
-            %([start_level, end_level, level],[start_index, end_index])
+        # print 'index->', range(start_index, end_index)
 
-        top = copy.deepcopy(target_matrix[level][start_index:end_index])
-        print "top ->", top
+        for index in range(start_index, end_index):
 
-        for index in range(start_index, end_index-start_index):
+            offset = index - start_index
 
-            target_matrix[level][index] = target_matrix[end_index-index][level]
-            target_matrix[index][level] = target_matrix[end_level-level][index]
-            target_matrix[end_level][index] = target_matrix[end_index-index][end_level]
-            target_matrix[index][end_level-level] = top[index]
+            # print 'offset->', offset
 
-        top = []
+            top = deepcopy(target_matrix[level][index])
 
-        print_matrix(target_matrix)
+            target_matrix[level][index] = deepcopy(target_matrix[end_index-offset][level])
+            target_matrix[end_index-offset][level] = deepcopy(target_matrix[size-level-1][end_index-offset])
+            target_matrix[size-level-1][end_index-offset] = deepcopy(target_matrix[index][size-level-1])
+            target_matrix[index][size-level-1] = deepcopy(top)
 
     return target_matrix
 
@@ -64,12 +67,18 @@ if __name__ == '__main__':
             		['a','b','c','d','e','f'],
             	]
 
+    my_matrix = [
+                    ['a','b','c','d','e'],
+                    ['a','b','c','d','e'],
+                    ['a','b','c','d','e'],
+                    ['a','b','c','d','e'],
+                    ['a','b','c','d','e'],
+                ]
+
     print_matrix(my_matrix)
 
     print "----------------------"
 
     new_matrix = rotate_image(my_matrix)
-
-    print "----------------------"
 
     print_matrix(new_matrix)

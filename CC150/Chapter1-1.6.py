@@ -48,24 +48,24 @@ def rotate_image(target_matrix):
 
             # print 'offset->', offset
 
-            top = deepcopy(target_matrix[level][index])
+            top = target_matrix[level][index]
 
-            target_matrix[level][index] = deepcopy(target_matrix[end_index-offset][level])
-            target_matrix[end_index-offset][level] = deepcopy(target_matrix[size-level-1][end_index-offset])
-            target_matrix[size-level-1][end_index-offset] = deepcopy(target_matrix[index][size-level-1])
-            target_matrix[index][size-level-1] = deepcopy(top)
+            target_matrix[level][index] = target_matrix[end_index-offset][level]
+            target_matrix[end_index-offset][level] = target_matrix[size-level-1][end_index-offset]
+            target_matrix[size-level-1][end_index-offset] = target_matrix[index][size-level-1]
+            target_matrix[index][size-level-1] = top
 
     return target_matrix
 
 if __name__ == '__main__':
-    my_matrix = [
-            		['a','b','c','d','e','f'],
-            		['a','b','c','d','e','f'],
-            		['a','b','c','d','e','f'],
-            		['a','b','c','d','e','f'],
-            		['a','b','c','d','e','f'],
-            		['a','b','c','d','e','f'],
-            	]
+    # my_matrix = [
+    #         		['a','b','c','d','e','f'],
+    #         		['a','b','c','d','e','f'],
+    #         		['a','b','c','d','e','f'],
+    #         		['a','b','c','d','e','f'],
+    #         		['a','b','c','d','e','f'],
+    #         		['a','b','c','d','e','f'],
+    #         	]
 
     my_matrix = [
                     ['a','b','c','d','e'],

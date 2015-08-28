@@ -32,7 +32,7 @@ class UnorderedLinkedList(object):
         for i in range(0,30):
             node = SinglyLinkedListNode()
 
-            node.data = str(i % 10 + 1)   # assign some values
+            node.data = int(i % 10 + 1)   # assign some values
 
             if i is 0:
 

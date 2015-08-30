@@ -73,7 +73,7 @@ class UnorderedLinkedList(object):
 
             last_node = node
 
-        m = randint(0,x)
+        m = randint(0,x-1)
 
         select_node = self.head
 

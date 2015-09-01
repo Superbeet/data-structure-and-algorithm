@@ -22,6 +22,12 @@ class Stack(object):
         else:
             return self.stack.pop()
 
+    def peek(self):
+        if len(self.stack) is 0:
+            return False
+        else:
+            return self.stack[-1]
+
     def length(self):
         return len(self.stack)
 
@@ -60,8 +66,10 @@ class StackWithMin(object):
         if self.stack.length<=0:
             return False
 
-        self.min = self.stack[-1].min
-        return stack.pop()
+        item = self.stack.pop()
+        self.min = self.stack.peek().min
+
+        return item.value
 
     def traverse(self):
         print self.stack
@@ -79,6 +87,8 @@ if __name__ == '__main__':
     stack.push(1)
     stack.push(4)
 
-##    stack.traverse()
+    stack.pop()
+    stack.pop()
+    stack.pop()
 
     print stack.min

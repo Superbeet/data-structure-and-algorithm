@@ -151,12 +151,12 @@ class RandomTree(object):
 
 def getHeight(tree_root):
     if tree_root is None:
-        return False
+        return 0
 
     return max(getHeight(tree_root.left), getHeight(tree_root.right)) + 1
 
 def isBalanced(tree_root):
-    if root is None:
+    if tree_root is None:
         return True
 
     height_diff = abs(getHeight(tree_root.left) - getHeight(tree_root.right))
@@ -165,6 +165,27 @@ def isBalanced(tree_root):
         return False
     else:
         return isBalanced(tree_root.left) and isBalanced(tree_node.right)
+#-----------------------------------------------------------------------
+def checkHeight(tree_root):
+    if tree_root is None:
+        return 0
+
+    left_height = checkHeight(tree_root.left)
+
+    if left_height is -1:
+        return -1
+
+    right_height = checkHeight(tree_root.right)
+
+    if right_height is -1:
+        return -1
+
+    height_diff = left_height - right_height
+
+    if abs(height_diff)>1:
+        return -1
+    else:
+        return max(left_height, right_height) + 1
 
 if __name__ == '__main__':
     tree = RandomTree()
@@ -185,3 +206,17 @@ if __name__ == '__main__':
 
     print "postorder_traverse ->"
     tree.postorder_traverse()
+
+
+
+    if isBalanced(tree.root):
+        print "Tree is balanced"
+    else:
+        print "Tree is unbalanced"
+
+    if checkHeight(tree.root) is -1:
+        print "Tree is unbalanced"
+    else:
+        print "Tree is balanced"
+
+

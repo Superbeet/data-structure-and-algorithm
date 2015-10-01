@@ -57,3 +57,7 @@ docs/_build/
 target/
 CC150/module1.py
 .idea/
+*.layout
+*.o
+*.win
+CC150/Chapter5/test.cpp
